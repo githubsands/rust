@@ -532,6 +532,33 @@ CFG_LDPATH_x86_64-unknown-freebsd :=
 CFG_RUN_x86_64-unknown-freebsd=$(2)
 CFG_RUN_TARG_x86_64-unknown-freebsd=$(call CFG_RUN_x86_64-unknown-freebsd,,$(2))
 
+# x86_64-unknown-openbsd configuration
+CC_x86_64-unknown-openbsd=$(CC)
+CXX_x86_64-unknown-openbsd=$(CXX)
+CPP_x86_64-unknown-openbsd=$(CPP)
+AR_x86_64-unknown-openbsd=$(AR)
+CFG_LIB_NAME_x86_64-unknown-openbsd=lib$(1).so
+CFG_STATIC_LIB_NAME_x86_64-unknown-openbsd=lib$(1).a
+CFG_LIB_GLOB_x86_64-unknown-openbsd=lib$(1)-*.so
+CFG_LIB_DSYM_GLOB_x86_64-unknown-openbsd=$(1)-*.dylib.dSYM
+CFG_GCCISH_CFLAGS_x86_64-unknown-openbsd := -Wall -Werror -g -fPIC -I/usr/local/include
+CFG_GCCISH_LINK_FLAGS_x86_64-unknown-openbsd := -shared -fPIC -g -pthread  -lrt
+CFG_GCCISH_DEF_FLAG_x86_64-unknown-openbsd := -Wl,--export-dynamic,--dynamic-list=
+CFG_GCCISH_PRE_LIB_FLAGS_x86_64-unknown-openbsd := -Wl,-whole-archive
+CFG_GCCISH_POST_LIB_FLAGS_x86_64-unknown-openbsd := -Wl,-no-whole-archive
+CFG_DEF_SUFFIX_x86_64-unknown-openbsd := .bsd.def
+CFG_LLC_FLAGS_x86_64-unknown-openbsd :=
+CFG_INSTALL_NAME_x86_64-unknown-openbsd =
+CFG_LIBUV_LINK_FLAGS_x86_64-unknown-openbsd := -pthread  -lkvm
+CFG_EXE_SUFFIX_x86_64-unknown-openbsd :=
+CFG_WINDOWSY_x86_64-unknown-openbsd :=
+CFG_UNIXY_x86_64-unknown-openbsd := 1
+CFG_PATH_MUNGE_x86_64-unknown-openbsd :=
+CFG_LDPATH_x86_64-unknown-openbsd :=
+CFG_RUN_x86_64-unknown-openbsd=$(2)
+CFG_RUN_TARG_x86_64-unknown-openbsd=$(call CFG_RUN_x86_64-unknown-openbsd,,$(2))
+
+
 ifeq ($(CFG_CCACHE_CPP2),1)
   CCACHE_CPP2=1
   export CCACHE_CPP

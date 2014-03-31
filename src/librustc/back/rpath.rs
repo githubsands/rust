@@ -37,6 +37,12 @@ pub fn get_rpath_flags(sess: &Session, out_filename: &Path) -> Vec<~str> {
                         ~"-Wl,-z,origin"]);
     }
 
+    if sess.targ_cfg.os == abi::OsOpenbsd {
+        flags.push_all([~"-Wl,-rpath,/usr/local/lib/gcc46",
+                        ~"-Wl,-rpath,/usr/local/lib/gcc44",
+                        ~"-Wl,-z,origin"]);
+    }
+
     debug!("preparing the RPATH!");
 
     let sysroot = sess.filesearch().sysroot;
@@ -130,7 +136,7 @@ pub fn get_rpath_relative_to_output(os: abi::Os,
 
     // Mac doesn't appear to support $ORIGIN
     let prefix = match os {
-        abi::OsAndroid | abi::OsLinux | abi::OsFreebsd
+        abi::OsAndroid | abi::OsLinux | abi::OsFreebsd | abi::OsOpenbsd
                           => "$ORIGIN",
         abi::OsMacos => "@loader_path",
         abi::OsWin32 => unreachable!()
@@ -244,6 +250,15 @@ mod test {
     #[cfg(target_os = "freebsd")]
     fn test_rpath_relative() {
         let o = abi::OsFreebsd;
+        let res = get_rpath_relative_to_output(o,
+            &Path::new("bin/rustc"), &Path::new("lib/libstd.so"));
+        assert_eq!(res.as_slice(), "$ORIGIN/../lib");
+    }
+
+    #[test]
+    #[cfg(target_os = "openbsd")]
+    fn test_rpath_relative() {
+        let o = abi::OsOpenbsd;
         let res = get_rpath_relative_to_output(o,
             &Path::new("bin/rustc"), &Path::new("lib/libstd.so"));
         assert_eq!(res.as_slice(), "$ORIGIN/../lib");

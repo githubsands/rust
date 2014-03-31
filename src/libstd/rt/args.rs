@@ -62,6 +62,7 @@ pub unsafe fn init(argc: int, argv: **u8) { realargs::init(argc, argv) }
 #[cfg(target_os = "linux")]
 #[cfg(target_os = "android")]
 #[cfg(target_os = "freebsd")]
+#[cfg(target_os = "openbsd")]
 mod imp {
     use cast;
     use clone::Clone;

@@ -116,6 +116,7 @@ mod test {
     #[cfg(target_os = "linux")]
     #[cfg(target_os = "macos")]
     #[cfg(target_os = "freebsd")]
+    #[cfg(target_os = "openbsd")]
     fn test_errors_do_not_crash() {
         // Open /dev/null as a library to get an error, and make sure
         // that only causes an error, and not a crash.
@@ -131,6 +132,7 @@ mod test {
 #[cfg(target_os = "android")]
 #[cfg(target_os = "macos")]
 #[cfg(target_os = "freebsd")]
+#[cfg(target_os = "openbsd")]
 pub mod dl {
     use c_str::ToCStr;
     use libc;

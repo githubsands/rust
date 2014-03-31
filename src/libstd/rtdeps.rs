@@ -41,6 +41,12 @@ extern {}
 #[link(name = "m")]
 extern {}
 
+#[cfg(target_os = "openbsd")]
+#[link(name = "execinfo")]
+#[link(name = "pthread")]
+#[link(name = "m")]
+extern {}
+
 #[cfg(target_os = "macos")]
 #[link(name = "System")]
 extern {}

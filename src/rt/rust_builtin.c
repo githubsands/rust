@@ -70,7 +70,7 @@ extern char **environ;
 #endif
 #endif
 
-#if defined(__FreeBSD__) || defined(__linux__) || defined(__ANDROID__)
+#if defined(__FreeBSD__) || defined(__linux__) || defined(__ANDROID__) || defined(__OpenBSD__)
 extern char **environ;
 #endif
 

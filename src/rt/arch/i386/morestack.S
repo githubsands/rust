@@ -73,7 +73,7 @@
 #define MORESTACK               ___morestack
 #define EXHAUSTED               _rust_stack_exhausted
 #else
-#if defined(__linux__) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 #define MORESTACK               __morestack
 #define EXHAUSTED               rust_stack_exhausted
 #else
@@ -86,7 +86,7 @@
 .globl EXHAUSTED
 
 // FIXME: What about __WIN32__?
-#if defined(__linux__) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	.hidden MORESTACK
 #else
 #if defined(__APPLE__)

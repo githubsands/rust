@@ -174,6 +174,9 @@ pub unsafe fn record_sp_limit(limit: uint) {
     unsafe fn target_record_sp_limit(limit: uint) {
         asm!("movq $0, %fs:24" :: "r"(limit) :: "volatile")
     }
+    // XXX this is bad
+    #[cfg(target_arch = "x86_64", target_os = "openbsd")] #[inline(always)]
+    unsafe fn target_record_sp_limit(_: uint) {}
 
     // x86
     #[cfg(target_arch = "x86", target_os = "macos")] #[inline(always)]
@@ -186,6 +189,9 @@ pub unsafe fn record_sp_limit(limit: uint) {
     unsafe fn target_record_sp_limit(limit: uint) {
         asm!("movl $0, %gs:48" :: "r"(limit) :: "volatile")
     }
+    // XXX this is bad
+    #[cfg(target_arch = "x86", target_os = "openbsd")] #[inline(always)]
+    unsafe fn target_record_sp_limit(_: uint) {}
     #[cfg(target_arch = "x86", target_os = "win32")] #[inline(always)]
     unsafe fn target_record_sp_limit(limit: uint) {
         // see: http://en.wikipedia.org/wiki/Win32_Thread_Information_Block
@@ -244,6 +250,9 @@ pub unsafe fn get_sp_limit() -> uint {
         asm!("movq %fs:24, $0" : "=r"(limit) ::: "volatile");
         return limit;
     }
+    // XXX this is bad
+    #[cfg(target_arch = "x86_64", target_os = "openbsd")] #[inline(always)]
+    unsafe fn target_get_sp_limit() -> uint { 0 }
 
     // x86
     #[cfg(target_arch = "x86", target_os = "macos")] #[inline(always)]
@@ -260,6 +269,9 @@ pub unsafe fn get_sp_limit() -> uint {
         asm!("movl %gs:48, $0" : "=r"(limit) ::: "volatile");
         return limit;
     }
+    // XXX this is bad
+    #[cfg(target_arch = "x86", target_os = "openbsd")] #[inline(always)]
+    unsafe fn target_get_sp_limit() -> uint { 0 }
     #[cfg(target_arch = "x86", target_os = "win32")] #[inline(always)]
     unsafe fn target_get_sp_limit() -> uint {
         let limit;

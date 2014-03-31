@@ -86,6 +86,7 @@ pub type _Unwind_Trace_Fn =
 
 #[cfg(target_os = "linux")]
 #[cfg(target_os = "freebsd")]
+#[cfg(target_os = "openbsd")]
 #[cfg(target_os = "win32")]
 #[link(name = "gcc_s")]
 extern {}

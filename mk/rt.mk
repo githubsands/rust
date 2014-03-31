@@ -157,6 +157,8 @@ else ifeq ($(OSTYPE_$(1)), apple-darwin)
   LIBUV_OSTYPE_$(1) := mac
 else ifeq ($(OSTYPE_$(1)), unknown-freebsd)
   LIBUV_OSTYPE_$(1) := freebsd
+else ifeq ($(OSTYPE_$(1)), unknown-openbsd)
+  LIBUV_OSTYPE_$(1) := openbsd
 else ifeq ($(OSTYPE_$(1)), linux-androideabi)
   LIBUV_OSTYPE_$(1) := android
   LIBUV_ARGS_$(1) := PLATFORM=android host=android OS=linux

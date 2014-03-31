@@ -282,6 +282,19 @@ mod imp {
             0 as pthread_cond_t;
     }
 
+    #[cfg(target_os = "openbsd")]
+    mod os {
+        use libc;
+
+        pub type pthread_mutex_t = *libc::c_void;
+        pub type pthread_cond_t = *libc::c_void;
+
+        pub static PTHREAD_MUTEX_INITIALIZER: pthread_mutex_t =
+            0 as pthread_mutex_t;
+        pub static PTHREAD_COND_INITIALIZER: pthread_cond_t =
+            0 as pthread_cond_t;
+    }
+
     #[cfg(target_os = "macos")]
     mod os {
         use libc;

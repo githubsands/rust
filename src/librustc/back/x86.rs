@@ -42,6 +42,10 @@ pub fn get_target_strs(target_triple: ~str, target_os: abi::Os) -> target_strs::
           abi::OsFreebsd => {
             ~"e-p:32:32-f64:32:64-i64:32:64-f80:32:32-n8:16:32"
           }
+
+          abi::OsOpenbsd => {
+            ~"e-p:32:32-f64:32:64-i64:32:64-f80:32:32-n8:16:32"
+          }
         },
 
         target_triple: target_triple,
